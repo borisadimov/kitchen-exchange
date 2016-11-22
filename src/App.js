@@ -1,73 +1,66 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as rootActions from './rootReducer';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
 
-    // this.state = {
-    //   data: {}
-    // };
-  }
+  toggleCategory = (category) => {
+    const { actions } = this.props;
 
-  toggleCategory = (i) => {
-    const { filters, actions } = this.props;
-
-    actions.updateFilter({
-      filter: i,
-      value: filters[i]!==null ? null : ''
+    actions.toggle({
+      category: category
     })
 
   }
 
-  handleFilterSelect = (e, i) => {
-    const { filters, actions } = this.props;
+  handleFilterSelect = (event, category) => {
+    const { actions } = this.props;
 
     actions.updateFilter({
-      filter: i,
-      value: e.target.value
+      category: category,
+      value: event.target.value
     })
 
     actions.changeSlide({
-      slider: i,
+      category: category,
       index: 0
     })
 
   }
 
-  handleSliderArrow = (i, dir) => {
-    const { slides, actions } = this.props;
+  handleSliderArrow = (category, dir) => {
+    const { goods, actions } = this.props;
 
-    let value = (dir === 'prev') ? slides[i]-1 : slides[i]+1
+    let value = (dir === 'prev') ?
+      goods[category].selected-1 : goods[category].selected+1
 
     actions.changeSlide({
-      slider: i,
+      category: category,
       index: value
     })
 
   }
 
   render() {
-    const { data, slides, filters, actions } = this.props;
+    const { goods } = this.props;
 
     return (
       <div className="App">
         <div className="controls">
-          {[0,1,2].map((i) => (
-              <div key={i}>
-                <span className="toggle" onClick={(e) => {this.toggleCategory(i)}}>
+          {Object.keys(goods).map((category) => (
+              <div key={category}>
+                <span className="toggle" onClick={(e) => {this.toggleCategory(category)}}>
                   {
-                    filters[i]!==null
+                    goods[category].enabled
                     ? <span>✅</span>
                     : <span>❎</span>
                   }
                 </span>
                 {' _ '}
                 <span className="select">
-                  <select value={filters[i]!==null ? filters[i] : ''} onChange={(e) => {this.handleFilterSelect(e,i)}} disabled={filters[i]===null}>
+                  <select value={goods[category].enabled ? goods[category].filter : ''} onChange={(event) => {this.handleFilterSelect(event, category)}} disabled={!goods[category].enabled}>
                     <option value=""></option>
                     <option value="1"> c единичками</option>
                     <option value="2"> c двойками</option>
@@ -79,20 +72,20 @@ class App extends Component {
         </div>
 
         <div className="content">
-          {[0,1,2].filter(i => filters[i]!==null).map((i) => (
-              <div key={i} className="slider">
-                <span onClick={(e) => this.handleSliderArrow(i, 'prev')}> {'<'} </span>
-                  {data[i].filter(el => el.indexOf(filters[i])!==-1).map((el, j) => (
+          {Object.keys(goods).filter(category => goods[category].enabled).map((category) => (
+              <div key={category} className="slider">
+                <span onClick={(e) => this.handleSliderArrow(category, 'prev')}> {'<'} </span>
+                  {goods[category].data.filter(el => el.indexOf(goods[category].filter)!==-1).map((el, index) => (
                       <span key={el} className="element">
                         {
-                          slides[i]===j
+                          goods[category].selected===index
                           ? <b>{el}{',  '}</b>
                           : <span>{el}{',  '}</span>
                         }
                       </span>
                     )
                   )}
-                  <span onClick={(e) => this.handleSliderArrow(i, 'next')}> {'>'} </span>
+                  <span onClick={(e) => this.handleSliderArrow(category, 'next')}> {'>'} </span>
               </div>
             )
           )
@@ -106,9 +99,7 @@ class App extends Component {
 function mapStateToProps(state, props) {
   window.state = state;
   return {
-    data: state.goodsReducer.data,
-    slides: state.goodsReducer.slides,
-    filters: state.goodsReducer.filters
+    goods: state.goodsReducer
   };
 }
 
