@@ -53,7 +53,6 @@ const {goodsSelectors, pricesSelectors} = ['hood', 'hob', 'oven', 'dishwasher', 
 
     acc.goodsSelectors[category] = filteredByColorItemsSelector;
     acc.pricesSelectors.push(priceSelector);
-
     return acc
   },{goodsSelectors: {}, pricesSelectors: []})
 
