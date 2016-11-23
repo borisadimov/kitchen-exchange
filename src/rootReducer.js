@@ -24,6 +24,7 @@ const offers = data.yml_catalog.shop[0].offers[0].offer;
 let initialState = {
   hood: {
     id: "79732",
+    name: "Вытяжки",
     selected: 0,
     filters: {
       'Встраиваемая, 60 см': 'Встраиваемая 60 см',
@@ -40,6 +41,7 @@ let initialState = {
   },
   hob: {
     id: "79735",
+    name: "Варочные панели",
     selected: 0,
     filters: {
       'электрическая': '⚡ Электрическая',
@@ -52,6 +54,7 @@ let initialState = {
   oven: {
     id: "79736",
     selected: 0,
+    name: "Духовые шкафы",
     filters: {
       'electic': 'Электрический',
       'gas': 'Газовый',
@@ -62,6 +65,7 @@ let initialState = {
   },
   dishwasher: {
     id: "79737",
+    name: "Посудомоечные машины",
     selected: 0,
     filters: {
       'sm': '45см',
@@ -73,6 +77,7 @@ let initialState = {
   },
   fridge: {
     id: "79734",
+    name: "Микроволновки",
     selected: 0,
     filters: {
       'sm': 'Высота 120 см',

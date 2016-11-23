@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import global from "../../constants/styles/settings.scss";
 import styles from './index.scss';
 import cn from 'classnames';
-import {bindActionCreators} from 'redux';
-import { toggle } from '../../rootReducer';
+import classNames from 'classnames/bind';
 
 import logo from '../../assets/images/slider-button.png';
 import icon1 from '../../assets/images/checkbox_icon1.svg';
+import check_icon from '../../assets/images/checked.svg';
+
+let cx = classNames.bind(styles);
 
 class Header extends Component {
 
-  toggleCategory = (category) => {
-    const { actions } = this.props;
-    actions.toggle({
-      category: category
-    })
-  }
-
   render() {
-    const { goods, color } = this.props;
+    const { goods, color, toggleCategory } = this.props;
 
     return (
       <div className={styles.header}>
@@ -54,17 +48,24 @@ class Header extends Component {
 
           <div className={styles.checkboxes}>
 
-              {Object.keys(goods).map((category) => (
-                  <div key={category}>
-                    <span className="toggle" onClick={(e) => {this.toggleCategory(category)}}>
-                      {
-                        goods[category].enabled
-                        ? <span>✅</span>
-                        : <span>❎</span>
-                      }
-                    </span>
-                    {' _ '}
-                    <span className="select">
+              {Object.keys(goods).map((category, i) => (
+                  <div key={category} className={cx(styles.category, goods[category].enabled ? styles.active : null)} >
+                    <div className={styles.inner} onClick={(e) => {toggleCategory(category)}}>
+                      <span className={styles.toggle}>
+                        {
+                          goods[category].enabled
+                          ? <img src={check_icon} className={styles.icon} alt="" />
+                          : null
+                        }
+                      </span>
+
+                      <img src={icon1} className={styles.image} alt="" />
+
+                      <span className={styles.name_category}>
+                        {goods[category].name}
+                      </span>
+                    </div>
+                    <span className={styles.select}>
                       <select
                         value={goods[category].enabled ? goods[category].filter : ''}
                         onChange={(event) => {this.handleFilterSelect(event, category)}}
@@ -105,18 +106,4 @@ class Header extends Component {
   }
 };
 
-function mapStateToProps(state, props) {
-  window.state = state;
-  return {
-    goods: state.goods,
-    color: state.color,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({ toggle }, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

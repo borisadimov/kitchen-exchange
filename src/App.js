@@ -17,6 +17,7 @@ class App extends Component {
   // }
 
   toggleCategory = (category) => {
+
     const { actions } = this.props;
     actions.toggle({
       category: category
@@ -59,46 +60,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header />
-        <div className="controls">
-          {Object.keys(goods).map((category) => (
-              <div key={category}>
-                <span className="toggle" onClick={(e) => {this.toggleCategory(category)}}>
-                  {
-                    goods[category].enabled
-                    ? <span>✅</span>
-                    : <span>❎</span>
-                  }
-                </span>
-                {' _ '}
-                <span className="select">
-                  <select
-                    value={goods[category].enabled ? goods[category].filter : ''}
-                    onChange={(event) => {this.handleFilterSelect(event, category)}}
-                    disabled={!goods[category].enabled}>
-                    <option value=""></option>
-                    {
-                      Object.keys(goods[category].filters).map(f =>
-                        <option key={f} value={f}>{goods[category].filters[f]}</option>
-                      )
-                    }
-                  </select>
-                </span>
-              </div>
-          ))}
-          {
-            Object.keys(color.types).map(c => (
-              <div
-                key={c}
-                className={`colorSelector ${color.selectedColor===c ? 'active' : ''}`}
-                onClick={e => this.updateColor(c)}>
-                {color.types[c].alias}
-              </div>
-            ))
-          }
-        </div>
+        <Header color={color} goods={goods} toggleCategory={this.toggleCategory}/>
 
-        {/* <div className="content">
+
+        <div className="content">
           {Object.keys(goods).filter(category => goods[category].enabled).map((category) => (
               <div key={category} className="slider">
                 <span onClick={(e) => this.handleSliderArrow(category, 'prev')}> {'<'} </span>
@@ -120,7 +85,7 @@ class App extends Component {
         {
           totalPrice
         }
-        </div> */}
+        </div> 
       </div>
     );
   }

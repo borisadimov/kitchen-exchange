@@ -85,3 +85,59 @@
 .heading {
   font-size: 24px;
 }
+
+.icon {
+  width: 15px;
+  height: 15px;
+}
+
+.image {
+  width: 70%;
+}
+
+.category {
+  display: inline-block;
+  width: 18%;
+  background: $white;
+  position: relative;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:not(:first-of-type) {
+    margin-left: 2%;
+  }
+}
+
+.toggle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.checkboxes {
+  text-align: center;
+  width: 90%;
+  margin: 50px auto 0 auto;
+}
+
+.name_category {
+  display: inline-block;
+  font-size: 16px;
+  min-height: 35px;
+  margin-top: 5px;
+  color: $black;
+}
+
+.select {
+  width: 100%;
+  display: inline-block;
+
+  select {
+    width: 100%;
+    background: $white;
+    height: 30px;
+    outline: none;
+  }
+}
