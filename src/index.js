@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Container from './Container';
-import './index.css';
 import {Provider} from 'react-redux';
 import configureStore from './configure-store';
+
+import 'normalize.css';
+import 'reset-css/reset.css';
 
 const store = configureStore();
 

@@ -130,6 +130,11 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1&-autoprefixer!postcss')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
+
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+      },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {
@@ -154,10 +159,6 @@ module.exports = {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      },
-      {
-        test: /\.xml$/,
-        loader: 'xml-loader'  // will load all .xml files with xml-loader by default
       }
     ]
   },

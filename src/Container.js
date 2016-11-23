@@ -3,8 +3,7 @@ import {bindActionCreators} from 'redux';
 import * as rootActions from './rootReducer';
 import { createSelector } from 'reselect'
 
-import App from './App'
-
+import App from './App';
 
 const itemFilter = (items, filter) =>
   items.filter(item => filter.length === 0 ? true :
@@ -88,4 +87,4 @@ function mapDispatchToProps(dispatch) {
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(App);
 
-export default Container
+export default Container;
