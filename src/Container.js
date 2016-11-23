@@ -19,12 +19,31 @@ const itemFilter = (items, filter) =>
     , 0) === filter.split(',').length
   )
 
+const colorFilter = (items, filter) =>
+  items.filter(item => filter.length === 0 ? true :
+    filter.split(',').reduce((counter, word) => {
+      return counter +
+        (item.param
+        .reduce((acc, value) => acc+' '+value['_'], '').toLowerCase()
+        .indexOf(word.toLowerCase()) > -1
+        ? 1
+        : 0)
+      }
+    , 0) > 0
+  )
+
 
 function createSelectorsForCategories(state) {
-  return Object.keys(state.goodsReducer).reduce((acc, category) => {
-    const offersSelector = (state) => state.goodsReducer[category].data
-    const filterSelector = (state) => state.goodsReducer[category].filter
-    acc[category] = createSelector([offersSelector, filterSelector], itemFilter)(state)
+  return Object.keys(state.goods).reduce((acc, category) => {
+    const offersSelector = (state) => state.goods[category].data
+    const filterSelector = (state) => state.goods[category].filter
+
+    const colorFilterSelector = (state) =>  state.color.selectedColor.length > 0
+      ? state.color.types[state.color.selectedColor].query
+      : ''
+
+    const filteredItemsSelector = createSelector([offersSelector, filterSelector], itemFilter)
+    acc[category] = createSelector([filteredItemsSelector, colorFilterSelector], colorFilter)(state)
     return acc
   },{})
 }
@@ -32,7 +51,8 @@ function createSelectorsForCategories(state) {
 function mapStateToProps(state, props) {
   window.state = state;
   return {
-    goods: state.goodsReducer,
+    goods: state.goods,
+    color: state.color,
     filteredGoods: createSelectorsForCategories(state)
   };
 }

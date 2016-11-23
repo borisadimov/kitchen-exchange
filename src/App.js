@@ -2,13 +2,24 @@ import React, {Component} from 'react';
 
 class App extends Component {
 
+  updateColor = (color) => {
+    const { actions, goods } = this.props;
+    Object.keys(goods).forEach((category) => {
+      actions.changeSlide({
+        category: category,
+        index: 0
+      })
+    })
+    actions.updateColor({
+      color: color
+    })
+  }
+
   toggleCategory = (category) => {
     const { actions } = this.props;
-
     actions.toggle({
       category: category
     })
-
   }
 
   handleFilterSelect = (event, category) => {
@@ -43,7 +54,7 @@ class App extends Component {
   }
 
   render() {
-    const { goods, filteredGoods } = this.props;
+    const { goods, filteredGoods, color } = this.props;
 
     return (
       <div className="App">
@@ -73,6 +84,16 @@ class App extends Component {
                 </span>
               </div>
           ))}
+          {
+            Object.keys(color.types).map(c => (
+              <div
+                key={c}
+                className={`colorSelector ${color.selectedColor===c ? 'active' : ''}`}
+                onClick={e => this.updateColor(c)}>
+                {color.types[c].alias}
+              </div>
+            ))
+          }
         </div>
 
         <div className="content">

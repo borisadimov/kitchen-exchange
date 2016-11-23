@@ -97,7 +97,7 @@ offers.forEach((offer) => {
 })
 
 // Reducer
-const goodsReducer = (state = initialState, action) => {
+const goods = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_SLIDE:
       return {
@@ -128,10 +128,48 @@ const goodsReducer = (state = initialState, action) => {
   }
 };
 
+const UPDATE_COLOR = 'kitchen/goods/UPDATE_COLOR';
+export function updateColor(payload) {
+  return { type: UPDATE_COLOR, ...payload };
+}
+
+const color = (state = {
+  types: {
+    black: {
+      alias: 'Черная',
+      query: 'черн',
+    },
+    silver: {
+      alias:  'Серебристая',
+      query: 'серебр',
+    },
+    white: {
+      alias:  'Белая',
+      query: 'бел',
+    },
+    cream: {
+      alias:  'Кремовая',
+      query: 'крем',
+    },
+  },
+  selectedColor: ''
+}, action) => {
+  switch (action.type) {
+    case UPDATE_COLOR:
+      return {
+        ...state,
+        selectedColor: action.color
+      }
+    default:
+      return state;
+  }
+}
+
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
-  goodsReducer
+  color,
+  goods
 });
 
 export default rootReducer;
