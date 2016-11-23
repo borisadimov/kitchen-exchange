@@ -54,7 +54,7 @@ class App extends Component {
   }
 
   render() {
-    const { goods, filteredGoods, color } = this.props;
+    const { goods, filteredGoods, color, totalPrice } = this.props;
 
     return (
       <div className="App">
@@ -114,6 +114,9 @@ class App extends Component {
               </div>
             )
           )
+        }
+        {
+          totalPrice
         }
         </div>
       </div>

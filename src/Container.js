@@ -32,28 +32,52 @@ const colorFilter = (items, filter) =>
     , 0) > 0
   )
 
+const getPrice = (items, index, enabled) => {
+  return items.length > 0 && enabled ? parseInt(items[index].price[0], 10) : 0
+}
 
-function createSelectorsForCategories(state) {
-  return Object.keys(state.goods).reduce((acc, category) => {
+const {goodsSelectors, pricesSelectors} = ['hood', 'hob', 'oven', 'dishwasher', 'fridge'].reduce((acc, category) => {
     const offersSelector = (state) => state.goods[category].data
     const filterSelector = (state) => state.goods[category].filter
+
+    const currentIndexSelector = (state) => state.goods[category].selected
+    const enabledSelector = (state) => state.goods[category].enabled
 
     const colorFilterSelector = (state) =>  state.color.selectedColor.length > 0
       ? state.color.types[state.color.selectedColor].query
       : ''
 
-    const filteredItemsSelector = createSelector([offersSelector, filterSelector], itemFilter)
-    acc[category] = createSelector([filteredItemsSelector, colorFilterSelector], colorFilter)(state)
+    const filteredByParamItemsSelector = createSelector([offersSelector, filterSelector], itemFilter)
+    const filteredByColorItemsSelector = createSelector([filteredByParamItemsSelector, colorFilterSelector], colorFilter)
+    const priceSelector = createSelector([filteredByColorItemsSelector, currentIndexSelector, enabledSelector], getPrice)
+
+    acc.goodsSelectors[category] = filteredByColorItemsSelector;
+    acc.pricesSelectors.push(priceSelector);
+
     return acc
-  },{})
-}
+  },{goodsSelectors: {}, pricesSelectors: []})
+
+
+const totalPriceSelector = createSelector([...pricesSelectors], (...prices) =>
+  {
+    return prices.reduce((a,b) => a+b,0)
+  })
+
+
 
 function mapStateToProps(state, props) {
   window.state = state;
   return {
     goods: state.goods,
     color: state.color,
-    filteredGoods: createSelectorsForCategories(state)
+    filteredGoods: {
+      hood: goodsSelectors.hood(state),
+      hob: goodsSelectors.hob(state),
+      oven: goodsSelectors.oven(state),
+      dishwasher: goodsSelectors.dishwasher(state),
+      fridge: goodsSelectors.fridge(state),
+    },
+    totalPrice: totalPriceSelector(state)
   };
 }
 
