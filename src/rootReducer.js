@@ -1,3 +1,4 @@
+
 // Actions
 const CHANGE_SLIDE  = 'kitchen/goods/CHANGE_SLIDE';
 const UPDATE_FILTER = 'kitchen/goods/UPDATE_FILTER';
@@ -16,38 +17,84 @@ export function toggle(payload) {
   return { type: TOGGLE, ...payload };
 }
 
-const initialState = {
+
+import data from './data.xml';
+const offers = data.yml_catalog.shop[0].offers[0].offer;
+
+let initialState = {
   hood: {
+    id: "79732",
     selected: 0,
+    filters: {
+      'Встраиваемая, 60 см': 'Встраиваемая 60 см',
+      'Встраиваемая, 90 см': 'Встраиваемая 90 см',
+      'Пристенная, 50 см': 'Подвесная 50 см',
+      'Пристенная, 60 см': 'Подвесная 60 см',
+      'Подвесная, 70 см': 'Подвесная 70 см',
+      'Подвесная, 80 см': 'Подвесная 80 см',
+    },
     filter: '',
-    data: ["foo 1", "foo 2", "foo 3", "foo 22", "foo 33"],
+    data: [],
     enabled: true,
+
   },
   hob: {
+    id: "79735",
     selected: 0,
+    filters: {
+      'электрическая': '⚡ Электрическая',
+      'газовая': '🔥 Газовая',
+    },
     filter: '',
-    data: ["bar 1", "bar 2", "bar 3", "bar 222", "bar 32"],
+    data: [],
     enabled: true,
   },
   oven: {
+    id: "79736",
     selected: 0,
+    filters: {
+      'electic': 'Электрический',
+      'gas': 'Газовый',
+    },
     filter: '',
-    data: ["buzz 1", "buzz 2", "buzz 3", "buzz 22", "buzz 222", "buzz 23", "buzz 323"],
+    data: [],
     enabled: true,
   },
   dishwasher: {
+    id: "79737",
     selected: 0,
+    filters: {
+      'sm': '45см',
+      'bg': '60см',
+    },
     filter: '',
-    data: ["kokoko 1", "kokoko 2", "kokoko 3", "kokoko 22", "kokoko 33"],
+    data: [],
     enabled: false,
   },
   fridge: {
+    id: "79734",
     selected: 0,
+    filters: {
+      'sm': 'Высота 120 см',
+      'md': 'Высота 140 см',
+      'bg': 'Высота 160 см',
+    },
     filter: '',
-    data: ["nasnas 1", "nasnas 2", "nasnas 3", "nasnas 22", "nasnas 33"],
+    data: [],
     enabled: false,
   },
 }
+
+offers.forEach((offer) => {
+  switch (offer.categoryId[0]){
+    case "79732": initialState.hood.data.push(offer); break;
+    case "79735": initialState.hob.data.push(offer); break;
+    case "79736": initialState.oven.data.push(offer); break;
+    case "79737": initialState.dishwasher.data.push(offer); break;
+    case "79734": initialState.fridge.data.push(offer); break;
+    default: return false;
+  }
+})
 
 // Reducer
 const goodsReducer = (state = initialState, action) => {

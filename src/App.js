@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as rootActions from './rootReducer';
 
 class App extends Component {
-
 
   toggleCategory = (category) => {
     const { actions } = this.props;
@@ -31,10 +27,13 @@ class App extends Component {
   }
 
   handleSliderArrow = (category, dir) => {
-    const { goods, actions } = this.props;
+    const { goods, filteredGoods, actions } = this.props;
 
-    let value = (dir === 'prev') ?
-      goods[category].selected-1 : goods[category].selected+1
+    const currentIndex = goods[category].selected;
+    const lastItemIndex = filteredGoods[category].length-1;
+    const value = (dir === 'prev')
+      ? (currentIndex > 0 ? currentIndex-1 : lastItemIndex)
+      : (currentIndex < lastItemIndex ? currentIndex+1 : 0)
 
     actions.changeSlide({
       category: category,
@@ -44,7 +43,7 @@ class App extends Component {
   }
 
   render() {
-    const { goods } = this.props;
+    const { goods, filteredGoods } = this.props;
 
     return (
       <div className="App">
@@ -60,11 +59,16 @@ class App extends Component {
                 </span>
                 {' _ '}
                 <span className="select">
-                  <select value={goods[category].enabled ? goods[category].filter : ''} onChange={(event) => {this.handleFilterSelect(event, category)}} disabled={!goods[category].enabled}>
+                  <select
+                    value={goods[category].enabled ? goods[category].filter : ''}
+                    onChange={(event) => {this.handleFilterSelect(event, category)}}
+                    disabled={!goods[category].enabled}>
                     <option value=""></option>
-                    <option value="1"> c единичками</option>
-                    <option value="2"> c двойками</option>
-                    <option value="3"> c тройками</option>
+                    {
+                      Object.keys(goods[category].filters).map(f =>
+                        <option key={f} value={f}>{goods[category].filters[f]}</option>
+                      )
+                    }
                   </select>
                 </span>
               </div>
@@ -75,12 +79,12 @@ class App extends Component {
           {Object.keys(goods).filter(category => goods[category].enabled).map((category) => (
               <div key={category} className="slider">
                 <span onClick={(e) => this.handleSliderArrow(category, 'prev')}> {'<'} </span>
-                  {goods[category].data.filter(el => el.indexOf(goods[category].filter)!==-1).map((el, index) => (
-                      <span key={el} className="element">
+                  {filteredGoods[category].map((el, index) => (
+                      <span key={el.name[0]} className="element">
                         {
                           goods[category].selected===index
-                          ? <b>{el}{',  '}</b>
-                          : <span>{el}{',  '}</span>
+                          ? <b>{el.name[0]}{',  '}</b>
+                          : <span>{el.name[0]}{',  '}</span>
                         }
                       </span>
                     )
@@ -96,17 +100,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state, props) {
-  window.state = state;
-  return {
-    goods: state.goodsReducer
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(rootActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
