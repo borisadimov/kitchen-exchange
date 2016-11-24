@@ -3,7 +3,7 @@
 .header {
   background: $blue;
   color: $white;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
 }
 
 .left_inner,
@@ -140,4 +140,46 @@
     height: 30px;
     outline: none;
   }
+}
+
+.colorSelector {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  padding: 8px 14px;
+  color: $black;
+  background: $white;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+
+  &:not(:first-of-type) {
+    margin-left: 15px;
+  }
+}
+
+.checked_icon {
+  display: inline-block;
+  width: 13px;
+  margin-right: 10px;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.color_picker {
+  margin-top: 20px;
+}
+
+.subheader {
+  background: $yellow;
+  color: $black;
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+.link {
+  color: $black;
+  font-family: sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.2px;
 }

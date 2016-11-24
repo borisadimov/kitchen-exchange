@@ -13,7 +13,7 @@ let cx = classNames.bind(styles);
 class Header extends Component {
 
   render() {
-    const { goods, color, toggleCategory } = this.props;
+    const { goods, color, toggleCategory, updateColor } = this.props;
 
     return (
       <div className={styles.header}>
@@ -80,28 +80,35 @@ class Header extends Component {
                     </span>
                   </div>
               ))}
+              <div className={styles.color_select}>
+                <div className={styles.heading}>
+                  Какого цвета техника вам подойдет?
+                </div>
+              </div>
+              <div className={styles.color_picker}>
               {
                 Object.keys(color.types).map(c => (
                   <div
                     key={c}
-                    className={`colorSelector ${color.selectedColor===c ? 'active' : ''}`}
-                    onClick={e => this.updateColor(c)}>
+                    className={/*`colorSelector ${color.selectedColor===c ? 'active' : ''}`*/ styles.colorSelector}
+                    onClick={e => updateColor(c)}>
+                    <img src={check_icon} className={styles.checked_icon} alt="" />
                     {color.types[c].alias}
                   </div>
                 ))
               }
-
+              </div>
           </div>
 
-
-          <div className={styles.color_select}>
-            <div className={styles.heading}>
-              Какого цвета техника вам подойдет?
-            </div>
-          </div>
         </div>
 
+        <div className={styles.subheader}>
+          <a href="#" className={styles.link}>
+            Топ 10 комплектов техники по акции!
+          </a>
+        </div>
       </div>
+
     )
   }
 };
