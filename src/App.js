@@ -9,33 +9,29 @@ class App extends Component {
     const { actions, goods } = this.props;
     Object.keys(goods).forEach((category) => {
       actions.changeSlide({
-        category: category,
+        category,
         index: 0
       })
     })
-    actions.updateColor({
-      color: color
-    })
+    actions.updateColor({ color })
   }
 
   toggleCategory = (category) => {
 
     const { actions } = this.props;
-    actions.toggle({
-      category: category
-    })
+    actions.toggle({ category })
   }
 
   handleFilterSelect = (event, category) => {
     const { actions } = this.props;
 
     actions.updateFilter({
-      category: category,
+      category,
       value: event.target.value
     })
 
     actions.changeSlide({
-      category: category,
+      category,
       index: 0
     })
 
@@ -46,25 +42,42 @@ class App extends Component {
 
     const currentIndex = goods[category].selected;
     const lastItemIndex = filteredGoods[category].length-1;
-    const value = (dir === 'prev')
+    const index = (dir === 'prev')
       ? (currentIndex > 0 ? currentIndex-1 : lastItemIndex)
       : (currentIndex < lastItemIndex ? currentIndex+1 : 0)
 
     actions.changeSlide({
-      category: category,
-      index: value
+      category,
+      index
     })
 
   }
 
   render() {
-    const { goods, filteredGoods, color, totalPrice } = this.props;
-
+    const { goods, filteredGoods, color, totalPrice, modal, actions: {showModal, hideModal} } = this.props;
+    const { toggleCategory, updateColor, handleFilterSelect, handleSliderArrow} = this;
     return (
       <div className="App">
-        <Header color={color} goods={goods} toggleCategory={this.toggleCategory} updateColor={this.updateColor} handleFilterSelect={this.handleFilterSelect} />
-        <List goods={goods} filteredGoods={filteredGoods} handleSliderArrow={this.handleSliderArrow} totalPrice={totalPrice} />
+        <Header {...{color, goods, toggleCategory, updateColor, handleFilterSelect}} />
+        <List {...{goods, filteredGoods, handleSliderArrow, totalPrice}}  />
         <Footer />
+        <div onClick={(e) => {showModal({content: 'content, тут вообще и объект может быть, это для демо'})}}>
+          открыть модалку
+        </div>
+        {
+          modal.show &&
+          <div className="modal-component" style={{position: 'fixed', top: '0'}}>
+            <div className="overlay">
+              <div className="modal-window">
+                { ''+modal.content }
+              </div>
+              <div onClick={hideModal}>
+                закрыть модалку
+              </div>
+            </div>
+          </div>
+        }
+
       </div>
     );
   }
