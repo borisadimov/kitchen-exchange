@@ -17,10 +17,9 @@ class List extends Component {
         <div className={styles.list}>
           {Object.keys(goods).filter(category => goods[category].enabled).map((category) => (
               <div key={category} className={styles.slider}>
-                {console.log(goods[category].enabled)}
                 <span className={styles.arrow} onClick={(e) => handleSliderArrow(category, 'prev')}> <img src={arrow} alt="" /> </span>
                   {filteredGoods[category].map((el, index) => (
-                      <span key={el.name[0]} className={styles.element} >
+                      <div key={el.name[0]} className={styles.element} >
 
                         {
                           goods[category].selected===index
@@ -31,7 +30,7 @@ class List extends Component {
                           : null
                         }
 
-                      </span>
+                      </div>
 
                     )
                   )}

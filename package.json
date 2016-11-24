@@ -49,18 +49,19 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "react": "^15.4.0",
-    "react-dom": "^15.4.0",
-    "react-redux": "^4.4.6",
-    "redux": "^3.6.0",
-    "reselect": "^2.5.4",
-    "xml-loader": "^1.1.0",
     "classnames": "^2.2.5",
     "node-sass": "^3.13.0",
     "normalize.css": "^5.0.0",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "react-fa": "^4.1.2",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
+    "reselect": "^2.5.4",
     "reset-css": "^2.2.0",
-    "sass-loader": "^4.0.2"
+    "sass-loader": "^4.0.2",
+    "xml-loader": "^1.1.0"
   },
   "scripts": {
     "start": "node scripts/start.js",

@@ -152,21 +152,20 @@
   color: $black;
   background: $white;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid $gray;
 
   &:not(:first-of-type) {
     margin-left: 15px;
   }
 
-  img {
-    opacity: 0;
+  &:hover {
+    background: $light_gray;
   }
 }
 
 .active {
-  img {
-    opacity: 1;
-  }
+  background: $light_gray;
+  border: 1px solid $gray;
 }
 
 .checked_icon {
