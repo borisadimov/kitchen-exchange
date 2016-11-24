@@ -8,7 +8,7 @@ import logo from '../../assets/images/slider-button.png';
 import icon1 from '../../assets/images/checkbox_icon1.svg';
 import check_icon from '../../assets/images/checked.svg';
 
-let cx = classNames.bind(styles);
+// let cx = classNames.bind(styles);
 
 class Header extends Component {
 
