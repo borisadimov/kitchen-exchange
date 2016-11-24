@@ -17,24 +17,33 @@ class List extends Component {
         <div className={styles.list}>
           {Object.keys(goods).filter(category => goods[category].enabled).map((category) => (
               <div key={category} className={styles.slider}>
-                <span className={styles.arrow} onClick={(e) => handleSliderArrow(category, 'prev')}> <img src={arrow} alt="" /> </span>
-                  {filteredGoods[category].map((el, index) => (
-                      <div key={el.name[0]} className={styles.element} >
-
-                        {
-                          goods[category].selected===index
-                          ? <div className={styles.inner}>
-                              <div className={styles.image} > <img src={el.picture[0]} /> </div>
-                              <span className={styles.name}>{el.name[0]}</span>
+                <span
+                  className={styles.arrow}
+                  onClick={(e) => handleSliderArrow(category, 'prev')}>
+                    <img src={arrow} alt="" />
+                </span>
+                  {
+                    filteredGoods[category].map((el, index) =>
+                        goods[category].selected===index && (
+                          <div key={el.name[0]} className={styles.element} >
+                            <div className={styles.inner}>
+                              <div className={styles.image} >
+                                <img src={el.picture[0]} />
+                              </div>
+                              <div className={styles.name}>
+                                {el.name[0]}
+                              </div>
                            </div>
-                          : null
-                        }
-
-                      </div>
+                          </div>
+                        )
 
                     )
-                  )}
-                  <span className={cn(styles.arrow, styles.arrow_reverse)} onClick={(e) => handleSliderArrow(category, 'next')}> <img src={arrow} alt="" /> </span>
+                  }
+                  <span
+                    className={cn(styles.arrow, styles.arrow_reverse)}
+                    onClick={(e) => handleSliderArrow(category, 'next')}>
+                      <img src={arrow} alt="" />
+                  </span>
               </div>
 
             )
