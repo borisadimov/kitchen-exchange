@@ -7,8 +7,10 @@ import arrow from '../../assets/images/arrow.svg';
 
 
 class List extends Component {
+
   render() {
     const { goods, handleSliderArrow, totalPrice, filteredGoods } = this.props;
+
 
     return (
       <div className={global.container}>
@@ -17,7 +19,7 @@ class List extends Component {
               <div key={category} className={styles.slider}>
                 <span className={styles.arrow} onClick={(e) => handleSliderArrow(category, 'prev')}> <img src={arrow} alt="" /> </span>
                   {filteredGoods[category].map((el, index) => (
-                      <span key={el.name[0]} className={styles.element}>
+                      <span key={el.name[0]} className={styles.element} >
                         {
                           goods[category].selected===index
                           ? <b>{el.name[0]}{',  '}</b>

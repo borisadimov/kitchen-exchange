@@ -63,6 +63,7 @@ class Header extends Component {
 
                       <span className={styles.name_category}>
                         {goods[category].name}
+                      {console.log(goods[category].name)}
                       </span>
                     </div>
                     <span className={styles.select}>
