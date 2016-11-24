@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import global from "../../constants/styles/settings.scss";
 import styles from './index.scss';
 import cn from 'classnames';
-import classNames from 'classnames/bind';
 
 import logo from '../../assets/images/slider-button.png';
 import icon1 from '../../assets/images/checkbox_icon1.svg';

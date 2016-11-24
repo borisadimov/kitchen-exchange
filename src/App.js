@@ -63,7 +63,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header color={color} goods={goods} toggleCategory={this.toggleCategory} updateColor={this.updateColor} handleFilterSelect={this.handleFilterSelect} />
-        <List goods={goods} filteredGoods={filteredGoods} handleSliderArrow={this.handleSliderArrow} totalPrice={totalPrice} />
+        <List goods={goods} toggleCategory={this.toggleCategory} filteredGoods={filteredGoods} handleSliderArrow={this.handleSliderArrow} totalPrice={totalPrice} />
         <Footer />
       </div>
     );

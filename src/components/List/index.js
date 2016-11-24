@@ -4,12 +4,12 @@ import styles from './index.scss';
 import cn from 'classnames';
 
 import arrow from '../../assets/images/arrow.svg';
-
+import { Icon } from 'react-fa';
 
 class List extends Component {
 
   render() {
-    const { goods, handleSliderArrow, totalPrice, filteredGoods } = this.props;
+    const { goods, handleSliderArrow, totalPrice, filteredGoods, toggleCategory } = this.props;
 
 
     return (
@@ -28,11 +28,11 @@ class List extends Component {
                           <div key={el.name[0]} className={styles.element} >
                             <div className={styles.inner}>
                               <div className={styles.image} >
-                                <img src={el.picture[0]} />
+                                <img src={el.picture[0]} alt="" />
                               </div>
-                              <div className={styles.name}>
+                              <span className={styles.name}>
                                 {el.name[0]}
-                              </div>
+                              </span>
                            </div>
                           </div>
                         )
@@ -54,9 +54,13 @@ class List extends Component {
           <span className={styles.key}>
             Добавить:
           </span>
+          {Object.keys(goods).map((category, i) => (
 
-          <span className={styles.addit}>Посудомоечная машина</span>
-          <span className={styles.addit}>Холодильник</span>
+              <span className={`${styles.addit} ${!goods[category].enabled ? styles.active : ''}`} key={category} onClick={(e) => {toggleCategory(category)}}>
+                {goods[category].name}
+              </span>
+          ))}
+
         </div>
         <div className={styles.final_price}>
           Общая стоимость: {totalPrice}
@@ -67,12 +71,14 @@ class List extends Component {
 
         <div className={styles.buy}>
           <span className={styles.button}>
+            <Icon name="credit-card" className={styles.credit_card} />
             Купить комплект в один клик
           </span>
         </div>
 
         <div className={styles.advice}>
           <span className={styles.link}>
+            <Icon name="phone" className={styles.phone} />
             Посоветоваться с консультантом
           </span>
         </div>
