@@ -70,7 +70,7 @@ class Item extends Component {
 
     return result;
   }
-  
+
   renderSlides() {
     let slides = this.props.slides;
     let transform = {

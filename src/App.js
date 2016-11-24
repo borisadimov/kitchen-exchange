@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header';
 import List from './components/List';
+import Footer from './components/Footer';
 
 class App extends Component {
 
@@ -61,8 +62,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Header color={color} goods={goods} toggleCategory={this.toggleCategory} updateColor={this.updateColor}/>
+        <Header color={color} goods={goods} toggleCategory={this.toggleCategory} updateColor={this.updateColor} handleFilterSelect={this.handleFilterSelect} />
         <List goods={goods} filteredGoods={filteredGoods} handleSliderArrow={this.handleSliderArrow} totalPrice={totalPrice} />
+        <Footer />
       </div>
     );
   }

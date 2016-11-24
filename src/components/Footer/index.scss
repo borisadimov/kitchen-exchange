@@ -1,0 +1,29 @@
+@import "../../constants/styles/vars.scss";
+
+.footer {
+  width: 100%;
+  min-width: 320px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.top {
+  background: $yellow;
+  padding: 20px 0;
+  font-size: 18px;
+}
+
+.bottom {
+  padding: 80px 0;
+}
+
+.number {
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 35px;
+}
+
+.mail {
+  color: #999;
+  line-height: 20px;
+}

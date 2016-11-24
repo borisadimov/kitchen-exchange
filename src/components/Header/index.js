@@ -13,7 +13,7 @@ let cx = classNames.bind(styles);
 class Header extends Component {
 
   render() {
-    const { goods, color, toggleCategory, updateColor } = this.props;
+    const { goods, color, toggleCategory, updateColor, handleFilterSelect } = this.props;
 
     return (
       <div className={styles.header}>
@@ -49,7 +49,7 @@ class Header extends Component {
           <div className={styles.checkboxes}>
 
               {Object.keys(goods).map((category, i) => (
-                  <div key={category} className={cx(styles.category, goods[category].enabled ? styles.active : null)} >
+                  <div key={category} className={`${styles.category} ${!goods[category].enabled ? styles.deactive : ''}`} >
                     <div className={styles.inner} onClick={(e) => {toggleCategory(category)}}>
                       <span className={styles.toggle}>
                         {
@@ -63,13 +63,12 @@ class Header extends Component {
 
                       <span className={styles.name_category}>
                         {goods[category].name}
-                      {console.log(goods[category].name)}
                       </span>
                     </div>
                     <span className={styles.select}>
                       <select
                         value={goods[category].enabled ? goods[category].filter : ''}
-                        onChange={(event) => {this.handleFilterSelect(event, category)}}
+                        onChange={(event) => {handleFilterSelect(event, category)}}
                         disabled={!goods[category].enabled}>
                         <option value=""></option>
                         {
@@ -91,7 +90,7 @@ class Header extends Component {
                 Object.keys(color.types).map(c => (
                   <div
                     key={c}
-                    className={/*`colorSelector ${color.selectedColor===c ? 'active' : ''}`*/ styles.colorSelector}
+                    className={`${styles.colorSelector} ${color.selectedColor===c ? styles.active : ''}`}
                     onClick={e => updateColor(c)}>
                     <img src={check_icon} className={styles.checked_icon} alt="" />
                     {color.types[c].alias}

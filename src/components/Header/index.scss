@@ -104,6 +104,7 @@
   box-sizing: border-box;
   border-radius: 5px;
   cursor: pointer;
+  vertical-align: top;
 
   &:not(:first-of-type) {
     margin-left: 2%;
@@ -156,6 +157,16 @@
   &:not(:first-of-type) {
     margin-left: 15px;
   }
+
+  img {
+    opacity: 0;
+  }
+}
+
+.active {
+  img {
+    opacity: 1;
+  }
 }
 
 .checked_icon {
@@ -183,4 +194,8 @@
   font-family: sans-serif;
   font-size: 18px;
   letter-spacing: 0.2px;
+}
+
+.deactive {
+  opacity: 0.5;
 }
