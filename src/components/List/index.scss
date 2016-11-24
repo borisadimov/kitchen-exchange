@@ -88,3 +88,16 @@
 .params {
   margin-top: 20px;
 }
+
+.final_price,
+.sale_price {
+  text-align: right;
+  width: 90%;
+  margin: 0 auto;
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.sale_price {
+  color: green;
+}

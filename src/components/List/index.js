@@ -32,9 +32,13 @@ class List extends Component {
             )
           )
         }
-        {
-          totalPrice
-        }
+        <div className={styles.final_price}>
+          Общая стоимость: {totalPrice}
+        </div>
+        <div className={styles.sale_price}>
+          Со скидкой при покупке комплекта: {totalPrice - (totalPrice * 5 / 100)}
+        </div>
+
         </div>
       </div>
     )
