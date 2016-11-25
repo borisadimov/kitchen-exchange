@@ -4,7 +4,6 @@ import styles from './index.scss';
 import cn from 'classnames';
 
 import logo from '../../assets/images/slider-button.png';
-import icon1 from '../../assets/images/checkbox_icon1.svg';
 import check_icon from '../../assets/images/checked.svg';
 
 class Header extends Component {
@@ -56,7 +55,7 @@ class Header extends Component {
                         }
                       </span>
 
-                      <img src={icon1} className={styles.image} alt="" />
+                      <img src={goods[category].image} className={styles.image} alt="" />
 
                       <span className={styles.name_category}>
                         {goods[category].name}

@@ -1,4 +1,3 @@
-
 // Actions
 const CHANGE_SLIDE  = 'kitchen/goods/CHANGE_SLIDE';
 const UPDATE_FILTER = 'kitchen/goods/UPDATE_FILTER';
@@ -21,11 +20,18 @@ export function toggle(payload) {
 import data from './data.xml';
 const offers = data.yml_catalog.shop[0].offers[0].offer;
 
+import hood from './assets/images/checkbox_icon1.svg';
+import dishwasher from './assets/images/dishwasher.svg';
+import hob from './assets/images/hob.svg';
+import oven from './assets/images/oven.svg';
+import fridge from './assets/images/fridge.svg';
+
 let initialState = {
   hood: {
     id: "79732",
     name: "Вытяжки",
     selected: 0,
+    image: hood,
     filters: {
       'Встраиваемая, 60 см': 'Встраиваемая 60 см',
       'Встраиваемая, 90 см': 'Встраиваемая 90 см',
@@ -43,6 +49,7 @@ let initialState = {
     id: "79735",
     name: "Варочные панели",
     selected: 0,
+    image: hob,
     filters: {
       'электрическая': '⚡ Электрическая',
       'газовая': '🔥 Газовая',
@@ -54,6 +61,7 @@ let initialState = {
   oven: {
     id: "79736",
     selected: 0,
+    image: oven,
     name: "Духовые шкафы",
     filters: {
       'electic': 'Электрический',
@@ -67,6 +75,7 @@ let initialState = {
     id: "79737",
     name: "Посудомоечные машины",
     selected: 0,
+    image: dishwasher,
     filters: {
       'sm': '45см',
       'bg': '60см',
@@ -79,6 +88,7 @@ let initialState = {
     id: "79734",
     name: "Микроволновки",
     selected: 0,
+    image: fridge,
     filters: {
       'sm': 'Высота 120 см',
       'md': 'Высота 140 см',

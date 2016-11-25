@@ -67,7 +67,8 @@ class List extends Component {
                                 <Popup {...{showModal, hideModal, modal, renderParams, el}} label="Подробнее..." />
                               </div>
                               <span className={styles.price}>
-                                {el.price[0]}
+                                <span>{el.price[0]}</span>
+                                <Icon name="rub" className={styles.rub_ico}/>
                               </span>
                            </div>
                           </div>
