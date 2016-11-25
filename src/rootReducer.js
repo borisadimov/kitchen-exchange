@@ -170,9 +170,41 @@ const color = (state = {
   }
 }
 
+const SHOW_MODAL = 'kitchen/goods/SHOW_MODAL';
+const HIDE_MODAL = 'kitchen/goods/HIDE_MODAL';
+
+export function showModal(payload) {
+  return { type: SHOW_MODAL, ...payload };
+}
+
+export function hideModal() {
+  return { type: HIDE_MODAL};
+}
+
+const modal = (state = {
+  show: false,
+  content: {}
+}, action) => {
+  switch (action.type) {
+    case SHOW_MODAL:
+      return {
+        show: true,
+        content: action.content
+      }
+    case HIDE_MODAL:
+      return {
+        show: false,
+        content: {}
+      }
+    default:
+      return state;
+  }
+}
+
 import {combineReducers} from 'redux';
 
 const rootReducer = combineReducers({
+  modal,
   color,
   goods
 });

@@ -74,6 +74,22 @@
   display: inline-block;
 }
 
+.param {
+  margin-top: 15px;
+}
+
+.param_name {
+  font-weight: bold;
+}
+
+.param_value {
+  margin-left: 10px;
+}
+
+.check {
+  margin-right: 10px;
+}
+
 .price {
   position: absolute;
   bottom: 25px;
@@ -84,11 +100,10 @@
 .name {
   font-size: 24px;
   vertical-align: top;
-  margin-left: 5%;
 }
 
 .params {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .final_price,
@@ -107,10 +122,6 @@
   margin-top: 50px;
   box-sizing: border-box;
   padding-right: 15px;
-
-  &:after {
-    
-  }
 }
 
 .sale_price {

@@ -2,15 +2,42 @@ import React, { Component } from 'react';
 import global from '../../constants/styles/settings.scss';
 import styles from './index.scss';
 import cn from 'classnames';
+import Popup from '../Popup';
 
 import arrow from '../../assets/images/arrow.svg';
 import { Icon } from 'react-fa';
 
 class List extends Component {
 
-  render() {
-    const { goods, handleSliderArrow, totalPrice, filteredGoods, toggleCategory } = this.props;
+  renderParams(item, lim = item.param.length) {
+    let params = item.param,
+        i = 0,
+        arrayOfParams = [],
+        result = [];
 
+    for (let param of params) {
+      ++i;
+      arrayOfParams.push(
+        <div className={styles.param} key={i}>
+          <div className={styles.param_name}>
+            <Icon name="check" className={styles.check} />
+            {param.$.name}:
+          </div>
+          <div className={styles.param_value}>{param._}</div>
+        </div>
+      );
+    };
+
+    for (let count=0; count < lim; count++) {
+      result[count] = arrayOfParams[count];
+    }
+
+    return result;
+  }
+
+  render() {
+    const { goods, handleSliderArrow, totalPrice, filteredGoods, toggleCategory, showModal, hideModal, modal } = this.props;
+    const { renderParams } = this;
 
     return (
       <div className={global.container}>
@@ -30,8 +57,17 @@ class List extends Component {
                               <div className={styles.image} >
                                 <img src={el.picture[0]} alt="" />
                               </div>
-                              <span className={styles.name}>
-                                {el.name[0]}
+                              <div className={styles.about}>
+                                <span className={styles.name}>
+                                  {el.name[0]}
+                                </span>
+                                <div className={styles.params}>
+                                  {this.renderParams(el, 4)}
+                                </div>
+                                <Popup {...{showModal, hideModal, modal, renderParams, el}} label="Подробнее..." />
+                              </div>
+                              <span className={styles.price}>
+                                {el.price[0]}
                               </span>
                            </div>
                           </div>

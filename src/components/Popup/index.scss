@@ -1,0 +1,74 @@
+@import "../../constants/styles/vars.scss";
+
+.label {
+  color: $dark_blue;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.inner {
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100vw;
+  min-height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 20;
+  overflow: scroll;
+}
+
+.modal_inner {
+  background: $white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  padding: 0px 0 15px 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.modal_content {
+  padding: 0 20px;
+}
+
+.header {
+  padding: 15px 20px 20px 20px;
+  border-bottom: 1px solid #adadad;
+}
+.title {
+  width: 95%;
+  display: inline-block;
+  vertical-align: baseline;
+}
+.popup_close {
+  display: inline-block;
+  transform: rotate(45deg);
+  font-size: 30px;
+  cursor: pointer;
+  vertical-align: baseline;
+  width: 5%;
+  text-align: right;
+}
+
+
+.button_inner {
+  padding: 15px 20px 0 20px;
+  text-align: right;
+  border-top: 1px solid $light_gray;
+  margin-top: 25px;
+}
+
+.button {
+  padding: 7px 15px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 1px solid #adadad;
+
+  &:hover {
+    background: $button_gray;
+  }
+}

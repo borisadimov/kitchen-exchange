@@ -64,8 +64,8 @@ const totalPriceSelector = createSelector([...pricesSelectors], (...prices) =>
 
 
 function mapStateToProps(state, props) {
-  window.state = state;
   return {
+    modal: state.modal,
     goods: state.goods,
     color: state.color,
     filteredGoods: {
