@@ -110,9 +110,14 @@
   border-radius: 5px;
   cursor: pointer;
   vertical-align: top;
+  border: 1px solid $gray;
 
   &:not(:first-of-type) {
     margin-left: 2%;
+  }
+
+  &:hover:not(.deactive) {
+    background: $light_gray;
   }
 }
 
