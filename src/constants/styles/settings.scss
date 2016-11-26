@@ -1,3 +1,5 @@
+@import "./vars.scss";
+
 .container {
   max-width: 1200px;
   min-width: 320px;
@@ -5,4 +7,16 @@
   margin: 0 auto;
   box-sizing: border-box;
   font-family: sans-serif;
+}
+
+@media screen and (max-width: $tablet) {
+  .container {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .container {
+    padding: 0 15px;
+  }
 }

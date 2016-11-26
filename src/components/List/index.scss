@@ -76,6 +76,8 @@
 
 .param {
   margin-top: 15px;
+  white-space: normal;
+  line-height: 20px;
 }
 
 .param_name {
@@ -213,4 +215,138 @@
 
 .rub_ico {
   margin-left: 10px;
+}
+
+@media screen and (max-width: $tablet) {
+  .image {
+    width: 25%;
+  }
+
+  .about {
+    width: 65%;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .param {
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .param_name,
+  .param_value {
+    font-size: 14px;
+    display: inline;
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .slider {
+    width: 100%;
+  }
+  .element {
+    padding: 10px 20px 50px 20px;
+  }
+  .arrow {
+    width: 20px;
+    height: 20px;
+    right: 5px;
+  }
+
+  .arrow_reverse {
+    left: 5px;
+  }
+
+  .price {
+    bottom: 15px;
+    right: 15px;
+    font-size: 20px;
+  }
+
+  .params {
+    margin-top: 25px;
+  }
+
+  .param {
+    white-space: normal;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+    max-height: 150px;
+    margin-left: 0;
+
+    img {
+      width: 80%;
+    }
+  }
+
+  .about {
+    width: 85%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .name {
+    white-space: normal;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+  }
+
+  .check {
+    display: none !important;
+  }
+
+  .key {
+    width: 100%;
+    margin-right: 0;
+    display: inline-block;
+  }
+
+  .additional {
+    width: 100%;
+  }
+
+  .addit {
+    margin-top: 10px;
+    padding: 10px;
+
+    &:not(:first-child) {
+      margin-left: 0;
+    }
+  }
+
+  .active {
+    display: block;
+  }
+
+  .final_price,
+  .sale_price {
+    width: 100%;
+    font-size: 18px;
+    padding-right: 0;
+  }
+
+  .button,
+  .advice {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    box-sizing: border-box;
+    padding: 13px 5px;
+    text-align: center;
+  }
+
+  .link,
+  .buy {
+    padding: 0;
+    width: 100%;
+  }
+
 }

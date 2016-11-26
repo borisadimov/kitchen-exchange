@@ -27,3 +27,13 @@
   color: #999;
   line-height: 20px;
 }
+
+@media screen and (max-width: $mobile) {
+  .footer {
+    margin-top: 20px;
+  }
+
+  .bottom {
+    padding: 40px 0;
+  }
+}

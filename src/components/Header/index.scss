@@ -6,11 +6,16 @@
   padding: 20px 0 0 0;
 }
 
+.top {
+  width: 100%;
+}
+
 .left_inner,
 .right_inner {
   display: inline-block;
   width: 50%;
   vertical-align: top;
+  white-space: nowrap;
 }
 
 .right_inner {
@@ -197,4 +202,112 @@
 
 .deactive {
   opacity: 0.5;
+}
+
+@media screen and (max-width: $tablet) {
+  .left_inner {
+    width: 20%;
+  }
+
+  .right_inner {
+    width: 80%;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .subtitle {
+    padding: 0 50px;
+  }
+
+  .category {
+    width: 25%;
+    margin-top: 2%;
+  }
+
+  .name_category {
+    display: block;
+  }
+
+  .checkboxes {
+    margin-top: 30px;
+  }
+};
+
+@media screen and (max-width: $mobile) {
+  .button {
+    font-size: 14px;
+    display: block;
+    width: 130px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 0 0 auto;
+    padding: 10px 0px;
+  }
+
+  .left_inner {
+    width: 50%;
+  }
+
+  .right_inner {
+    width: 50%;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .row {
+    vertical-align: middle;
+  }
+
+  .city {
+    font-size: 14px;
+  }
+
+  .middle {
+    margin-top: 30px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+    padding: 0;
+  }
+
+  .category {
+    width: 80%;
+    margin: 2% auto;
+
+    &:not(:first-of-type) {
+      margin-left: 0;
+    }
+  }
+
+  .colorSelector {
+    box-sizing: border-box;
+    width: 45%;
+    padding: 10px 0;
+    margin-top: 3%;
+
+    &:not(:first-of-type) {
+      margin-left: 0;
+    }
+
+    &:nth-of-type(2n) {
+      margin-left: 3%
+    }
+  }
+
+  .checked_icon {
+    display: none;
+  }
+
+  .link {
+    font-size: 14px;
+  }
 }
