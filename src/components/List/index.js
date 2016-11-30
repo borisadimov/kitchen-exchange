@@ -44,6 +44,7 @@ class List extends Component {
         <div className={styles.list}>
           {Object.keys(goods).filter(category => goods[category].enabled).map((category) => (
               <div key={category} className={styles.slider}>
+                <div className={styles.close_slider} onClick={(e) => {toggleCategory(category)}}>+</div>
                 <span
                   className={styles.arrow}
                   onClick={(e) => handleSliderArrow(category, 'prev')}>

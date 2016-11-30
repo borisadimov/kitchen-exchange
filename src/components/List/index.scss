@@ -15,6 +15,23 @@
 
 }
 
+.close_slider {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  display: inline-block;
+  font-size: 40px;
+  transform: rotate(45deg);
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity .5s ease;
+  will-change: opacity;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .element {
   width: 100%;
   display: inline-block;
