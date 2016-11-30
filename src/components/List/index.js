@@ -35,6 +35,18 @@ class List extends Component {
     return result;
   }
 
+  countActive() {
+    const { goods } = this.props;
+    let count = 0;
+
+    for (let category of Object.keys(goods)) {
+      goods[category].enabled !== false ? count++ : count--;
+    }
+
+    return count === 5 ? true : false;
+
+  }
+
   render() {
     const { goods, handleSliderArrow, totalPrice, filteredGoods, toggleCategory, showModal, hideModal, modal } = this.props;
     const { renderParams } = this;
@@ -89,8 +101,9 @@ class List extends Component {
         }
 
         <div className={styles.additional}>
-          <span className={styles.key}>
+          <span className={`${styles.key} ${this.countActive() ? styles.hidden : null}`}>
             Добавить:
+
           </span>
           {Object.keys(goods).map((category, i) => (
 
@@ -102,9 +115,11 @@ class List extends Component {
         </div>
         <div className={styles.final_price}>
           Общая стоимость: {totalPrice}
+          <Icon name="rub" className={styles.rub_ico}/>
         </div>
         <div className={styles.sale_price}>
-          Со скидкой при покупке комплекта: {totalPrice - (totalPrice * 5 / 100)}
+          Со скидкой при покупке комплекта: {totalPrice - Math.floor(totalPrice * 5 / 100)}
+          <Icon name="rub" className={styles.rub_ico}/>
         </div>
 
         <div className={styles.buy}>
