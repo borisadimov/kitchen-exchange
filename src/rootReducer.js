@@ -171,10 +171,11 @@ const color = (state = {
 }, action) => {
   switch (action.type) {
     case UPDATE_COLOR:
-      return {
-        ...state,
-        selectedColor: action.color
-      }
+      let prevColor = state.selectedColor,
+          curColor =  action.color;
+      
+      return prevColor === curColor ? {...state, selectedColor: ''} : {...state, selectedColor: action.color}
+
     default:
       return state;
   }

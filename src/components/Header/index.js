@@ -66,10 +66,11 @@ class Header extends Component {
                         value={goods[category].enabled ? goods[category].filter : ''}
                         onChange={(event) => {handleFilterSelect(event, category)}}
                         disabled={!goods[category].enabled}>
-                        <option value=""></option>
                         {
                           Object.keys(goods[category].filters).map(f =>
-                            <option key={f} value={f}>{goods[category].filters[f]}</option>
+
+                              <option key={f} value={f}>{goods[category].filters[f]}</option>
+
                           )
                         }
                       </select>
