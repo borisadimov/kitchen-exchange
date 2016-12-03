@@ -74,6 +74,29 @@
   }
 }
 
+.param_name,
+.param_value {
+  display: inline-block;
+}
+
+.param {
+  margin-top: 15px;
+  white-space: normal;
+  line-height: 20px;
+}
+
+.param_name {
+  font-weight: bold;
+}
+
+.param_value {
+  margin-left: 10px;
+}
+
+.check {
+  margin-right: 5px;
+}
+
 @media screen and (max-width: $mobile) {
   .label {
     font-size: 14px;

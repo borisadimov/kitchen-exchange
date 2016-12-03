@@ -1,27 +1,32 @@
 import React from 'react';
 import styles from './index.scss';
 import global from '../../constants/styles/settings.scss';
+import CSSModules from 'react-css-modules';
+
+const options = {
+  allowMultiple: true
+}
 
 const Footer = () => {
 
 
   return (
-    <div className={styles.footer}>
-      <div className={styles.top}>
+    <div styleName="footer">
+      <div styleName="top">
         <div className={global.container}>
-          <span className={styles.txt}>
+          <span>
             Вы можете оплатить технику сейчас, а доставку заказать в любое удобное время в течение 1 года
           </span>
         </div>
       </div>
 
-      <div className={styles.bottom}>
+      <div styleName="bottom">
         <div className={global.container}>
-          <div className={styles.number}>
+          <div styleName="number">
             8 (800) 333-17-90
           </div>
 
-          <div className={styles.mail}>
+          <div styleName="mail">
             info@birja-kuhon.ru
           </div>
         </div>
@@ -29,7 +34,6 @@ const Footer = () => {
     </div>
   )
 
-
 }
 
-export default Footer;
+export default CSSModules(Footer, styles, options);

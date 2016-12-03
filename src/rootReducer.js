@@ -31,6 +31,7 @@ let initialState = {
     id: "79732",
     name: "Вытяжки",
     selected: 0,
+    prevSlide: null,
     image: hood,
     filters: {
       'Встраиваемая, 60 см': 'Встраиваемая 60 см',
@@ -49,6 +50,7 @@ let initialState = {
     id: "79735",
     name: "Варочные панели",
     selected: 0,
+    prevSlide: null,
     image: hob,
     filters: {
       'электрическая': '⚡ Электрическая',
@@ -62,6 +64,7 @@ let initialState = {
     id: "79736",
     selected: 0,
     image: oven,
+    prevSlide: null,
     name: "Духовые шкафы",
     filters: {
       'electic': 'Электрический',
@@ -75,6 +78,7 @@ let initialState = {
     id: "79737",
     name: "Посудомоечные машины",
     selected: 0,
+    prevSlide: null,
     image: dishwasher,
     filters: {
       'sm': '45см',
@@ -88,6 +92,7 @@ let initialState = {
     id: "79734",
     name: "Микроволновки",
     selected: 0,
+    prevSlide: null,
     image: fridge,
     filters: {
       'sm': 'Высота 120 см',
@@ -109,27 +114,47 @@ offers.forEach((offer) => {
     case "79734": initialState.fridge.data.push(offer); break;
     default: return false;
   }
-})
+});
+
+(() => {
+  let categories = [];
+  let maxItems = [];
+
+  Object.keys(initialState).map((category, index) => {
+    return categories.push(initialState[category]);
+  });
+
+  categories.map((category, index) => {
+    return maxItems.push(category.data.length - 1);
+  });
+
+  Object.keys(initialState).map((category, index) => {
+    return initialState[category].prevSlide = maxItems[index];
+  });
+
+})();
 
 // Reducer
 const goods = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_SLIDE:
-      return {
-        ...state,
-        [action.category]: {
-          ...state[action.category],
-          selected: action.index
-        }
-      };
+
     case UPDATE_FILTER:
       return {
         ...state,
         [action.category]: {
           ...state[action.category],
-          filter: action.value
+          filter: action.value,
         }
       }
+      case CHANGE_SLIDE:
+        return {
+          ...state,
+          [action.category]: {
+            ...state[action.category],
+            selected: action.index,
+            nextSlide: action.index !== action.lastItemIndex ? action.index + 1 : 0
+          }
+        };
     case TOGGLE:
       return {
         ...state,
@@ -173,7 +198,7 @@ const color = (state = {
     case UPDATE_COLOR:
       let prevColor = state.selectedColor,
           curColor =  action.color;
-      
+
       return prevColor === curColor ? {...state, selectedColor: ''} : {...state, selectedColor: action.color}
 
     default:

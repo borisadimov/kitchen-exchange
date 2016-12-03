@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
-import style from './index.scss';
+import styles from './index.scss';
 import { Icon } from 'react-fa';
+import CSSModules from 'react-css-modules';
+
+const options = {
+  allowMultiple: true
+}
 
 class Popup extends Component {
 
@@ -8,29 +13,29 @@ class Popup extends Component {
     const { modal, showModal, hideModal, label, renderParams, el } = this.props;
 
     return (
-      <div className={style.popup}>
-          <div className={style.label} onClick={(e) => {showModal({content: renderParams(el)})}}>
+      <div>
+          <div styleName="label" onClick={(e) => {showModal({content: renderParams(el)})}}>
             {label}
           </div>
           {
             modal.show &&
-            <div className={style.inner}>
-              <div className={style.overlay}>
-                <div className={style.modal_inner}>
-                  <div className={style.header}>
-                    <span className={style.title}>
+            <div styleName="inner">
+              <div>
+                <div styleName="modal_inner">
+                  <div styleName="header">
+                    <span styleName="title">
                       Технические характеристики
                     </span>
-                    <div onClick={hideModal} className={style.popup_close}>
+                    <div onClick={hideModal} styleName="popup_close">
                       +
                     </div>
                   </div>
-                  <div className={style.modal_content}>
+                  <div styleName="modal_content">
                     { modal.content }
                   </div>
-                  <div className={style.button_inner}>
-                    <div onClick={hideModal} className={style.button}>
-                      <Icon name="replay" className={style.icon} />
+                  <div styleName="button_inner">
+                    <div onClick={hideModal} styleName="button">
+                      <Icon name="replay" />
                       <span>Вернуться</span>
                     </div>
                   </div>
@@ -44,4 +49,4 @@ class Popup extends Component {
   }
 }
 
-export default Popup;
+export default CSSModules(Popup, styles, options);

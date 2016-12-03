@@ -8,6 +8,7 @@
   width: 90%;
   margin: 40px auto 0 auto;
   transition: box-shadow .5s ease;
+  min-height: 300px;
 
   &:hover {
     box-shadow: 0px 10px 10px 10px $box_shadow;
@@ -23,6 +24,7 @@
   font-size: 40px;
   transform: rotate(45deg);
   cursor: pointer;
+  z-index: 10;
   opacity: 0.4;
   transition: opacity .5s ease;
   will-change: opacity;
@@ -41,6 +43,8 @@
   transition: transform .5s ease-in-out;
   overflow: hidden;
   min-height: 300px;
+  position: absolute;
+  background: #fff;
 }
 
 .arrow {
@@ -243,6 +247,10 @@
   margin-left: 10px;
 }
 
+.check {
+  margin-right: 5px;
+}
+
 @media screen and (max-width: $tablet) {
   .image {
     width: 25%;
@@ -374,5 +382,4 @@
     padding: 0;
     width: 100%;
   }
-
 }

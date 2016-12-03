@@ -7,6 +7,7 @@ class App extends Component {
 
   updateColor = (color) => {
     const { actions, goods } = this.props;
+
     Object.keys(goods).forEach((category) => {
       actions.changeSlide({
         category,

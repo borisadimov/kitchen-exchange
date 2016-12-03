@@ -15,6 +15,46 @@
     -->
     <title>React App</title>
   </head>
+  <style>
+    .slider-enter {
+      transform: translateX(100%);
+    }
+
+    .slider-enter.slider-enter-active {
+      transform: translateX(0);
+      transition: all .5s ease;
+
+    }
+
+    .slider-leave-active {
+      transform: translateX(0);
+      transition: all .5s ease;
+    }
+
+    .slider-leave {
+      transform: translateX(-100%);
+    }
+
+    .slider_reverse-enter {
+      transform: translateX(-100%);
+    }
+
+    .slider_reverse-enter.slider_reverse-enter-active {
+      transform: translateX(0);
+      transition: all .5s ease;
+
+    }
+
+    .slider_reverse-leave-active {
+      transform: translateX(0);
+      transition: all .5s ease;
+    }
+
+    .slider_reverse-leave {
+      transform: translateX(100%) !important;
+    }
+
+  </style>
   <body>
     <div id="root"></div>
     <!--

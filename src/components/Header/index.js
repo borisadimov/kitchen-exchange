@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import global from "../../constants/styles/settings.scss";
 import styles from './index.scss';
-import cn from 'classnames';
+import CSSModules from 'react-css-modules';
 
 import logo from '../../assets/images/slider-button.png';
 import check_icon from '../../assets/images/checked.svg';
+
+const options = {
+  allowMultiple: true
+}
+
 
 class Header extends Component {
 
@@ -12,56 +17,56 @@ class Header extends Component {
     const { goods, color, toggleCategory, updateColor, handleFilterSelect } = this.props;
 
     return (
-      <div className={styles.header}>
-        <div className={cn(global.container, styles.container)}>
-          <div className={styles.top}>
-            <div className={styles.left_inner}>
-              <div className={styles.logo}>
-                <div className={styles.row}>
-                  <span className={styles.name}>БИРЖА<br />КУХОНЬ</span>
-                  <span className={styles.city}>Город: Москва</span>
+      <div styleName="header">
+        <div className={global.container}>
+          <div styleName="top">
+            <div styleName="left_inner">
+              <div styleName="logo">
+                <div styleName="row">
+                  <span styleName="name">БИРЖА<br />КУХОНЬ</span>
+                  <span styleName="city">Город: Москва</span>
                 </div>
-                <div className={styles.row}>
+                <div styleName="row">
                   <img src={logo} alt="" />
                 </div>
               </div>
             </div>
 
-            <div className={styles.right_inner}>
+            <div styleName="right_inner">
 
-              <div className={styles.buttons}>
-                <a href="#" className={styles.button}>Мне нужна кухня</a>
-                <a href="#" className={styles.button}>8(800)333-17-90</a>
+              <div >
+                <a href="#" styleName="button">Мне нужна кухня</a>
+                <a href="#" styleName="button">8(800)333-17-90</a>
               </div>
 
             </div>
 
           </div>
-          <div className={styles.middle}>
-            <div className={styles.title}>Умная покупка кухонной техники</div>
-            <div className={styles.subtitle}>После оплаты техника может храниться на складе до готовности кухни, потом мы её привезём, подключим и даже научим ей пользоваться 🎂</div>
+          <div styleName="middle">
+            <div styleName="title">Умная покупка кухонной техники</div>
+            <div styleName="subtitle">После оплаты техника может храниться на складе до готовности кухни, потом мы её привезём, подключим и даже научим ей пользоваться 🎂</div>
           </div>
 
-          <div className={styles.checkboxes}>
+          <div styleName="checkboxes">
 
               {Object.keys(goods).map((category, i) => (
-                  <div key={category} className={`${styles.category} ${!goods[category].enabled ? styles.deactive : ''}`} >
-                    <div className={styles.inner} onClick={(e) => {toggleCategory(category)}}>
-                      <span className={styles.toggle}>
+                  <div key={category} styleName={`category ${!goods[category].enabled ? 'deactive' : ''}`} >
+                    <div onClick={(e) => {toggleCategory(category)}}>
+                      <span styleName="toggle">
                         {
                           goods[category].enabled
-                          ? <img src={check_icon} className={styles.icon} alt="" />
+                          ? <img src={check_icon} styleName="icon" alt="" />
                           : null
                         }
                       </span>
 
-                      <img src={goods[category].image} className={styles.image} alt="" />
+                      <img src={goods[category].image} styleName="image" alt="" />
 
-                      <span className={styles.name_category}>
+                      <span styleName="name_category">
                         {goods[category].name}
                       </span>
                     </div>
-                    <span className={styles.select}>
+                    <span styleName="select">
                       <select
                         value={goods[category].enabled ? goods[category].filter : ''}
                         onChange={(event) => {handleFilterSelect(event, category)}}
@@ -77,19 +82,19 @@ class Header extends Component {
                     </span>
                   </div>
               ))}
-              <div className={styles.color_select}>
-                <div className={styles.heading}>
+              <div styleName="color_select">
+                <div styleName="heading">
                   Какого цвета техника вам подойдет?
                 </div>
               </div>
-              <div className={styles.color_picker}>
+              <div styleName="color_picker">
               {
                 Object.keys(color.types).map(c => (
                   <div
                     key={c}
-                    className={`${styles.colorSelector} ${color.selectedColor===c ? styles.active : ''}`}
+                    styleName={`colorSelector ${color.selectedColor===c ? 'active' : ''}`}
                     onClick={e => updateColor(c)}>
-                    <img src={check_icon} className={styles.checked_icon} alt="" />
+                    <img src={check_icon} styleName="checked_icon" alt="" />
                     {color.types[c].alias}
                   </div>
                 ))
@@ -99,8 +104,8 @@ class Header extends Component {
 
         </div>
 
-        <div className={styles.subheader}>
-          <a href="#" className={styles.link}>
+        <div styleName="subheader">
+          <a href="#" styleName="link">
             Топ 10 комплектов техники по акции!
           </a>
         </div>
@@ -110,4 +115,4 @@ class Header extends Component {
   }
 };
 
-export default Header;
+export default CSSModules(Header, styles, options);
