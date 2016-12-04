@@ -14,23 +14,25 @@ const options = {
 
 class List extends Component {
 
+
+
   constructor(props) {
     super(props);
 
     this.state = {
       name: 'slider'
     }
+
+    this._canClick = true;
   }
 
-
-
-  onPrevArrow() {
+  onNextArrow() {
     this.state = {
       name: 'slider_reverse'
     }
   }
 
-  onNextArrow() {
+  onPrevArrow() {
     this.state = {
       name: 'slider'
     }
@@ -87,12 +89,20 @@ class List extends Component {
                 <span
                   styleName="arrow"
                   onClick={(e) => {
-                     handleSliderArrow(category, 'prev');
+                     if (this._canClick) {
+                       handleSliderArrow(category, 'prev');
+                       this._canClick = false;
+                       setTimeout(() => {
+                         this._canClick = true;
+                       }, 1000);
+                     }
                      this.onPrevArrow()
                    }}>
                     <img src={arrow} alt="" />
                 </span>
+
                 <ReactCSSTransitionGroup transitionName={this.state.name} transitionLeaveTimeout={500} transitionEnterTimeout={500}>
+
                   {
                     filteredGoods[category].map((el, index) => {
                       return goods[category].selected===index && (
@@ -124,11 +134,20 @@ class List extends Component {
 
                     })
                   }
+
                 </ReactCSSTransitionGroup>
+
                   <span
                     styleName="arrow arrow_reverse"
                     onClick={(e) => {
-                      handleSliderArrow(category, 'next');
+                      if (this._canClick) {
+                        handleSliderArrow(category, 'next');
+                        this._canClick = false;
+                        setTimeout(() => {
+                          this._canClick = true;
+                        }, 1000);
+                      }
+
                       this.onNextArrow();
                     }}>
                       <img src={arrow} alt="" />
